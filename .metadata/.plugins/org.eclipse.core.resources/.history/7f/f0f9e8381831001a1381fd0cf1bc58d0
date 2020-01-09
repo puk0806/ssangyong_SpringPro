@@ -1,8 +1,0 @@
-package net.madvirus.spring4.chap01;
-
-public class Project {
-
-	private List<String> srcDirs;	// 소스파일 경로
-	privfate String binDir;			// 클래스 파일 경로
-	
-}

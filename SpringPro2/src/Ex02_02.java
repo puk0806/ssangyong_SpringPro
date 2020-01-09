@@ -1,3 +1,5 @@
+import javax.naming.AuthenticationException;
+
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 

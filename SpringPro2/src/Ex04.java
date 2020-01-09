@@ -1,3 +1,7 @@
+import org.springframework.context.support.GenericXmlApplicationContext;
+
+import net.madvirus.spring4.chap02.AuthFailLogger;
+import net.madvirus.spring4.chap02.AuthenticationService;
 
 public class Ex04 {
 
@@ -10,7 +14,19 @@ public class Ex04 {
 		// 4. AuthenticationService		인증 처리 서비스 클래스
 		// 5. PasswordChangeService		비밀 번호 변경 클래스
 		
-
+		
+		
+		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("config.xml");
+		AuthFailLogger logger = ctx.getBean("authFailLogger",AuthFailLogger.class);
+		
+		for(int i =0 ;i<=6; i++) {
+			logger.insertBadPw("bkchoi", "1111");
+		}
+		
+		AuthenticationService service = ctx.getBean("AuthenticationService",AuthenticationService.class);
+		service.authenticate("admin", "1234");	// 인증 받는 메소드
+		
+		System.out.println(" END ");
 		
 	}
 	

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- MavenBuildRunner buildRunner = new MavenBuildRunner(); -->
+	<!-- buildRunner.setMavenPath("c:\\apache-maven-3.1.1"); -->
+	<!-- 위의작업 -->
+	<!-- 반드시 기억할 것(bean) : 패키지명.클래스명 -->
+	<!-- 반드시 기억할 것(property) : mavenPath == setMavenPath() 	(set제외 첫글자 소문자!!!!!) -->
+	<bean id="buildRunner" class="net.madvirus.spring4.chap01.MavenBuildRunner">
+		<property name="mavenPath">
+			<value>c:\\apache-maven-3.1.1</value>
+		</property>
+	</bean>
+	
+	<!-- Project samplProject = new Project(); -->
+	<!-- public Project(BuildRunner buildRunner) { ...  } --> 			
+	<!-- public void setBinDir(String binDir) { ...	} --> 				
+	<!-- List<String> srcDirs = new ArrayList<String>();				
+	srcDirs.add("src");
+	srcDirs.add("resources");
+	samplProject.setSrcDirs(srcDirs); -->
+	
+	
+	<bean id="sampleProject" class="net.madvirus.spring4.chap01.Project"> <!-- 스프링으로 객체생성 설정-->
+		<!-- 방법 1  -->
+		<!--
+		<constructor-arg>
+			<ref bean="buildRunner"/>
+		</constructor-arg>
+		<property name="binDir">
+			<value>bin</value>
+		</property>
+		 -->
+		 
+		 <!-- 방법2 -->
+		<constructor-arg ref="buildRunner"></constructor-arg> 			<!-- 스프링 빈 생성자 DI -->
+		<property name="binDir" value="bin"></property> 				<!-- 변수 생성 -->
+		<property name="srcDirs">			 							<!-- 컬렉션 변수 생성 p77-->
+			<list>
+				<value>src</value>
+				<value>resources</value>
+			</list>
+		</property>
+		
+	</bean>
+	
+	
+		
+
+
+  <!-- more bean definitions go here -->
+
+</beans>
