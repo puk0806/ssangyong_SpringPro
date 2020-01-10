@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd"
+           >
+           
+	<!-- @Autowired @Resource 를 사용하려면 아래코딩 사용 -->
+	<!--
+	다수의 스프링 (전처리기) 빈을 등록하는 코딩
+    1. AutowiredAnnotationBeanPostProcessor 전처리기 빈 등록
+    2. CommonAnnotationBeanPostProcessor 빈 등록
+    3. QualifierAnnotationAutowireCandidateResolve 빈등록       
+     -->
+	<context:annotation-config></context:annotation-config>  
+	<bean id="record" class="di.RecordImpl" >
+		<qualifier value="r1"></qualifier>
+	</bean>
+	<bean id="record2" class="di.RecordImpl">
+		<qualifier value="r2"></qualifier>
+	</bean>
+
+	<bean id="recordView" class="di.RecordViewImpl">
+		<!-- @Autowired 어노테이션으로 자동으로 주입 -->
+		<!-- <property name="record"><ref bean="record"/></property> -->
+	</bean>
+	
+  <!-- more bean definitions go here -->
+
+</beans>

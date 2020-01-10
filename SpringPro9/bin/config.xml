@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd"
+           >
+	
+	<context:component-scan base-package="net.madvirus.spring4.chap02"/>
+	<context:annotation-config></context:annotation-config>  
+
+	<!-- User user1 = new User("bkchoi","1234") -->
+	
+	<bean id="user1" class="net.madvirus.spring4.chap02.User">
+		<constructor-arg value="bkchoi"></constructor-arg>
+		<constructor-arg value="1234"></constructor-arg>
+	</bean>
+	<bean id="user2" class="net.madvirus.spring4.chap02.User">
+		<constructor-arg value="test"></constructor-arg>
+		<constructor-arg value="1234"></constructor-arg>
+	</bean>
+
+	<!-- 
+	<bean id="authFailLogger" class="net.madvirus.spring4.chap02.AuthFailLogger">
+		<property name="threshold" value="5"></property>
+	</bean>
+	 -->
+	 
+	
+	<bean id="userRepository" class="net.madvirus.spring4.chap02.UserRepository">
+		<property name="users">
+			<list>
+				<ref bean="user1"/>
+				<bean id="user3" class="net.madvirus.spring4.chap02.User">
+					<constructor-arg value="admin"></constructor-arg>
+					<constructor-arg value="1234"></constructor-arg>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	 
+
+	<!-- 
+	<bean id="AuthenticationService" class="net.madvirus.spring4.chap02.AuthenticationService">
+		<property name="userRepository" ref="userRepository"></property>
+		<property name="failLogger" ref="authFailLogger"></property>
+	</bean>
+	 -->
+
+</beans>

@@ -10,8 +10,6 @@ public class Ex03 {
 			// 1. record_applicationContext.xml 에     <context:annotation-confin/>    추가
 			// 2. xml 파일에 Config.java  improt 설정하기
 			
-			
-			
 			// record_applicationContext.XML 맨위에 주석 풀어서 실행하기
 			GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("record_applicationContext.xml");
 			
