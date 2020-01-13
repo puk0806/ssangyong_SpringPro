@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:p="http://www.springframework.org/schema/p"
+xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- User user1 = new User("bkchoi","1234") --> 
+	<bean id="user1" class="net.madvirus.spring4.chap02.User">
+		<constructor-arg value="bkchoi"></constructor-arg>
+		<constructor-arg value="1234"></constructor-arg>
+	</bean>
+	<!-- 위코딩 c 네임스페이스 사용해서 코딩 (편리)-->
+	<!-- 
+	<bean id="user1" class="net.madvirus.spring4.chap02.User" 
+			c:id="bkhcoi" c:password="1234" />
+	<bean id="user2" class="net.madvirus.spring4.chap02.User" 
+			c:_0="madvirus" c:_1="qwer"/>
+	 -->
+    <!--
+        파라미터가 빈객체일 경우 			
+	<bean id="user1" class="net.madvirus.spring4.chap02.User" 
+			c:id-ref="bkhcoi" c:password-ref="1234" />
+	<bean id="user2" class="net.madvirus.spring4.chap02.User" 
+			c:_0-ref="madvirus" c:_1-ref="qwer"/>
+	 -->
+	 
+	
+
+	<bean id="authFailLogger" class="net.madvirus.spring4.chap02.AuthFailLogger">
+		<property name="threshold" value="5"></property>
+	</bean> 
+	<!-- 위 코딩 p 네임페이스 사용해서 코딩 (Spring 4점대부터 지원)-->
+	<!-- 
+	<bean id="authFailLogger" class="net.madvirus.spring4.chap02.AuthFailLogger"
+		p:threshold="5">
+	</bean>
+	 -->
+	 
+	 
+	<bean id="userRepository" class="net.madvirus.spring4.chap02.UserRepository">
+		<property name="users">
+			<list>
+				<ref bean="user1"/>
+				<bean id="user2" class="net.madvirus.spring4.chap02.User">
+					<constructor-arg value="admin"></constructor-arg>
+					<constructor-arg value="1234"></constructor-arg>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<bean id="AuthenticationService" class="net.madvirus.spring4.chap02.AuthenticationService">
+		<property name="userRepository" ref="userRepository"></property>
+		<property name="failLogger" ref="authFailLogger"></property>
+	</bean>
+	
+
+</beans>

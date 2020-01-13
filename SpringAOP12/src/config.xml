@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:aop="http://www.springframework.org/schema/aop"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           ">
+
+   <context:component-scan base-package="aop" />
+      
+   <!-- xml 스키마 기반 AOP 설정 : aop:config, aop:around 태그 사용 -->
+   <!-- aop 사용 못함 -->
+   <aop:config>
+	<!-- 
+	   	<aop:advisor advice-ref=""/>		advice 용어
+	   	<aop:aspect></aop:aspect>			aspect 용어
+	   	<aop:pointcut expression="" id=""/>	pointcut 용어
+	-->
+	   
+	   
+	   
+	   <aop:aspect id="traceAspect" ref="logPrintProfiler" >
+	   
+	   	<!-- 
+	   	p 250 aspectj의 pointcut 표현식
+	   	execution 명시자
+	   	형식) execution(수식어패턴? 리턴 타입패턴 클래스이름 패턴? 메서드이름패턴(파라미터패턴))
+	   		- 수식어 패턴 
+	   			- 생략 가능한 부분
+	   			- public, protected 등이 온다.
+	   			- 스프링 메서드에만 aop적용되기 때문에 public
+	   		- 리턴타입 패턴
+	   			- * 모든 것
+	   		- 클래스 패턴
+	   			- aop..  (aop.. 뜻 : aop나 aop하위에 에 있는 )
+	   		- 메서드 이른 패턴
+	   			- 메서드명(파라미터들..)
+	   		
+	   	within 명시자
+	   	bean 명시자
+	   	-->
+	   	
+	   	<!--
+	   	pointcut 동일 참조 받기 
+	   	<aop:around method="trace" pointcut="execution(public * aop..*(*,*))"/>
+	   	<aop:before method="before" pointcut="execution(public * aop..*(*,*))"/>
+	   	<aop:after method="afterFinally" pointcut="execution(public * aop..*(*,*))"/>
+ 		-->
+ 		
+ 		<!-- pointcut 참조해서 사용하기  -->
+ 		
+	 	<aop:pointcut expression="execution(public * aop..*(*,*))" id="publicMethod"/>
+	        
+        <aop:around method="trace" pointcut-ref="publicMethod" />
+        <aop:before method="before" pointcut-ref="publicMethod" />
+        <aop:after method="afterFinally"  pointcut-ref="publicMethod"/>
+	   		   
+	   </aop:aspect>
+   </aop:config>
+
+</beans>
+
+
+<!-- 
+총 정리
+
+1. 의존 모듈 추가  spring-aop.jar/ spring-aopalliance.jar
+                   aspectj.weaver.jar
+		   pom.xml <dependency>
+2.  보조 객체 선언
+  class LogPrintProfiler
+  {
+       // aroundadvice  메서드
+       public Object  trace(  반드시 ProceedingJoinpoint  joinpoint ) throw
+       {
+           // 전
+	   joinpoint.proceed();
+	   // 후
+       }
+
+  }
+3. xml 설정 파일
+   <aop:config>    AOP 설정하는 부분
+      <aop:aspect id="???" ref="logPrintProfiler" >
+         <aop:around  method="trace" 위빙 pointcut="aspectj 표현식 ..." />
+      </aop:aspect>
+   </aop:config>
+-->
