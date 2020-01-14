@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           ">
+
+	<bean id="noticeDao" class="newlecture.dao.NoticeDao">
+	</bean>
+	<!-- DI/AOP id값은 빈객체의 고유한 이름 -->
+	<!-- name 값은 id값의 별칭 -->
+	<!-- name 속성은 [요청 URL]을 설정하면 클래스 호출 -->
+	<bean name="/customer/notice.htm" class="controllers.customer.NoticeController">
+		<property name="noticeDao" ref="noticeDao"></property>
+	</bean>
+	
+
+</beans>

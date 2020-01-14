@@ -13,8 +13,9 @@
 
    <context:component-scan base-package="aop" />
    
-      
    <!-- @Aspect 어노테이션 기반 AOP 설정 p 226 -->
+   <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+   
    
 
 
