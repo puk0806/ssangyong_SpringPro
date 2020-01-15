@@ -1,26 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.awt.List"/>
-<fullyQualifiedTypeName name="net.madvirus.spring4.chap01.BuildRunner"/>
-<fullyQualifiedTypeName name="java.lang.StackOverflowError"/>
-<fullyQualifiedTypeName name="net.madvirus.spring4.chap01.MavenBuildRunner"/>
-<fullyQualifiedTypeName name="org.springframework.context.support.AbstractApplicationContext"/>
-<fullyQualifiedTypeName name="net.madvirus.spring4.chap01.Project"/>
-<fullyQualifiedTypeName name="di.Record"/>
-<fullyQualifiedTypeName name="di.RecordView"/>
-<fullyQualifiedTypeName name="java.util.Scanner"/>
-<fullyQualifiedTypeName name="di.RecordViewImple"/>
-<fullyQualifiedTypeName name="java.util.Map"/>
-<fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
-<fullyQualifiedTypeName name="net.madvirus.spring4.chap02.AuthInfo"/>
-<fullyQualifiedTypeName name="java.lang.RuntimeException"/>
 <fullyQualifiedTypeName name="net.madvirus.spring4.chap02.UserNotFoundException"/>
 <fullyQualifiedTypeName name="javax.naming.AuthenticationException"/>
 <fullyQualifiedTypeName name="java.util.Properties"/>
 <fullyQualifiedTypeName name="Sensor"/>
 <fullyQualifiedTypeName name="net.madvirus.spring4.chap02.AuthFailLogger"/>
 <fullyQualifiedTypeName name="java.lang.LinkageError"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="net.madvirus.spring4.chap02.UserRepository"/>
 <fullyQualifiedTypeName name="net.madvirus.spring4.chap02.PasswordChangeService"/>
@@ -54,6 +39,25 @@
 <fullyQualifiedTypeName name="org.springframework.context.support.GenericApplicationContext"/>
 <fullyQualifiedTypeName name="org.springframework.context.support.GenericXmlApplicationContext"/>
 <fullyQualifiedTypeName name="org.aspectj.lang.JoinPoint"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="aop.Calculator"/>
+<fullyQualifiedTypeName name="org.aspectj.lang.annotation.Aspect"/>
+<fullyQualifiedTypeName name="org.aspectj.lang.annotation.Pointcut"/>
+<fullyQualifiedTypeName name="org.aspectj.lang.annotation.Around"/>
+<fullyQualifiedTypeName name="javax.naming.ldap.Control"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="javax.security.auth.message.callback.PrivateKeyCallback.Request"/>
+<fullyQualifiedTypeName name="org.springframework.web.servlet.mvc.Controller"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
+<fullyQualifiedTypeName name="com.sun.prism.impl.BaseMesh.FaceMembers"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="org.springframework.web.portlet.ModelAndView"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
+<fullyQualifiedTypeName name="org.springframework.ui.Model"/>
+<fullyQualifiedTypeName name="org.springframework.web.servlet.ModelAndView"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMethod"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="newlecture.vo.Notice"/>
 </qualifiedTypeNameHistroy>

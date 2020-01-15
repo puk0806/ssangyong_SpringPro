@@ -79,8 +79,25 @@ nomaxvalue
 nocache
 nocycle;
 
-
 -->
+
+<!-- 
+공지사항 보기 링크 태그를 클릭 했을 때 처리
+<td class="title"><a href="noticeDetail.jsp">${dto.title }</a></td>
+ ㄱ. noticeDetail.htm 요청 -> 컨트롤러
+     controllers.customer.NoticeDetailController
+     
+
+    3.문제점
+    noticeEdit.htm?seq=1 -> NoticeEditController
+     요청 URL 별로 각각의 ~~Controller 클래스 추가
+     수백개의 컨트롤러 생성 -> <bean>태그 코딩 추가
+  
+    ->어노테이션 사용해서 수정
+    ->수백개의 ~~Controller 클래스 추가 X
+ -->
+
+
 
 </body>
 </html>

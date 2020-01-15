@@ -14,7 +14,15 @@
 	<!-- DI/AOP id값은 빈객체의 고유한 이름 -->
 	<!-- name 값은 id값의 별칭 -->
 	<!-- name 속성은 [요청 URL]을 설정하면 클래스 호출 -->
+	
+	
+	
+	
 	<bean name="/customer/notice.htm" class="controllers.customer.NoticeController">
+		<property name="noticeDao" ref="noticeDao"></property>
+	</bean>
+	
+	<bean name="/customer/noticeDetail.htm" class="controllers.customer.NoticeDetailController">
 		<property name="noticeDao" ref="noticeDao"></property>
 	</bean>
 	

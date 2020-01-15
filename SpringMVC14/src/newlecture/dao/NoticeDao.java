@@ -9,8 +9,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import newlecture.vo.Notice;
 // 공지사항
+
 public class NoticeDao {
 	
 	// 조건에 맞는 공지사항의 갯수를 반환하는 메서드
@@ -110,7 +113,7 @@ public class NoticeDao {
 	// 공지사항 보기
 	public Notice getNotice(String seq) throws ClassNotFoundException, SQLException
 	{
-		String sql = "SELECT * FROM NOTICES WHERE SEQ="+seq;
+		String sql = "SELECT * FROM NOTICES WHERE SEQ= "+seq;
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","scott", "tiger");
 		Statement st = con.createStatement();
