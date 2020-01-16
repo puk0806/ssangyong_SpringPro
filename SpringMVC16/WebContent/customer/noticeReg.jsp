@@ -77,7 +77,8 @@
 							공지사항등록
 						</li>
 					</ul>
-					<form action="" method="post">
+					<!-- 파일 업로드를 위해 enctype="multipart/form-data" 속성 추가-->
+					<form action="" method="post" enctype="multipart/form-data">
 						<div id="notice-article-detail" class="article-detail margin-large" >						
 							<dl class="article-detail-row">
 								<dt class="article-detail-title">

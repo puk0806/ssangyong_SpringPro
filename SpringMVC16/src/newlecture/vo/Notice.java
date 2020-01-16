@@ -2,6 +2,8 @@ package newlecture.vo;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 public class Notice {
 	private int seq;
 	private String title;
@@ -11,6 +13,16 @@ public class Notice {
 	private int hit;
 	private String content;
 	
+	// p 445 첨부된 파일 저장 필드
+	// noticeReg.jsp의 input name이랑 똑같이
+	private CommonsMultipartFile file;
+	
+	public CommonsMultipartFile getFile() {
+		return file;
+	}
+	public void setFile(CommonsMultipartFile file) {
+		this.file = file;
+	}
 	public String getFilesrc() {
 		return filesrc;
 	}

@@ -12,6 +12,21 @@
            ">
 <context:component-scan base-package="newlecture.dao, controllers" />
 
+<!-- p 439 스프링에서 파일 파일 업로드 MultipartResover 등록 -->
+<!-- CommonsMultipartResolver : Commons FileUpload API를 이용한 방법  -->
+<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<!-- p 439 표9-2 속성 설정-->
+	<!-- 최대 업로드 가능한 바이트 크기 , -1 (제한 없음) 기본값 (long형)-->
+	<property name="maxUploadSize" value="-1"></property>
+	<!-- 디스크에 임시파일을 생성하기 전에 메모리에 보관할수 있는 최대 바이트 크기 기본값 10240바이트 (int형) -->
+	<!-- 
+	<property name="maxInMemorySize" value=""></property>
+	<property name="defaultEncoding">String (ISO-8859-1)</property>
+	-->
+	
+</bean>
+
+
 <!-- 
 	<bean id="noticeDao" class="newlecture.dao.NoticeDao"></bean>
 	
