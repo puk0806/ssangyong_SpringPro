@@ -1,11 +1,14 @@
 package controllers;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -208,7 +211,7 @@ public class CustomerController {
 	// 첨부 파일 있는경우 글 수정 작업(noticeEdit.htm(POST방식))
 	// 똑같은 url로 POST 하기 떄문에 seq 파라미터가 같이 넘어온다!!!
 	@RequestMapping(value = "noticeEdit.htm",method = RequestMethod.POST)
-	public String noticeEdit(Notice notice, HttpServletRequest request) throws ClassNotFoundException, SQLException {
+	public String noticeEdit(@RequestParam("seq") String seq ,Notice notice, HttpServletRequest request, @RequestParam("oFileSrc") String oFileSrc) throws ClassNotFoundException, SQLException {
 		
 		CommonsMultipartFile multiPartFile = notice.getFile();
 		if(!multiPartFile.isEmpty()) {
@@ -218,9 +221,14 @@ public class CustomerController {
 			
 			originalFilename = getFileNameCheck(uploadPath, originalFilename);
 			
-			File dest = new File(uploadPath,originalFilename);
+			File file = new File(uploadPath,originalFilename);
 			try {
-				multiPartFile.transferTo(dest);
+				multiPartFile.transferTo(file);
+				
+				// 전 파일이 존재하다면 삭제
+				File deloFile = new File(uploadPath,oFileSrc);
+				if(deloFile.exists()) deloFile.delete();
+				
 				notice.setFilesrc(originalFilename);
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
@@ -235,12 +243,49 @@ public class CustomerController {
 
 	// 글 삭제 작업(noticeDel.htm(GET방식))
 	@RequestMapping("noticeDel.htm")
-	public String noticeDel(@RequestParam("seq") String seq) throws ClassNotFoundException, SQLException {
+	public String noticeDel(@RequestParam("seq") String seq,@RequestParam("oFileSrc") String oFileSrc,HttpServletRequest request) throws ClassNotFoundException, SQLException {
+		
+		System.out.println("oFileSrc : "+oFileSrc);
+		
+		String uploadPath = request.getServletContext().getRealPath("/customer/upload");
+		File deloFile = new File(uploadPath,oFileSrc);
+		if(deloFile.exists()) deloFile.delete();
 		
 		int cnt = this.noticeDao.delete(seq);
 		
 		return "redirect:notice.htm";
 	}
+	
+	@RequestMapping("download.htm")
+	public void download(
+			@RequestParam("p") String p     // customer/upload 폴더경로
+			, @RequestParam("f") String f   // 다운로드할 파일명
+			, HttpServletRequest request
+			, HttpServletResponse response)
+					throws IOException {
+
+		/*파일 이름에 대한 인코딩 처리 추가*/		
+		//System.out.println(f);
+		String fname =  f; 
+		//  new String(f.getBytes("ISO8859_1"), "UTF-8"); // f
+		//System.out.println(fname);
+		response.setHeader("Content-Disposition"
+				, "attachment;filename="+
+		new String(fname.getBytes(), "ISO8859_1"));		
+		/*파일 다운로드가 가능하도록 하기 위한 물리적 경로*/
+		String fullPath = 	request.getServletContext().getRealPath(p + "/" + fname);
+		/*파일 다운로드에 대한 처리 과정 추가*/
+		FileInputStream fin = new FileInputStream(fullPath);
+		ServletOutputStream sout = response.getOutputStream();
+		byte[] buf = new byte[1024];
+		int size = 0;
+		while((size = fin.read(buf, 0, 1024)) != -1) {
+			sout.write(buf, 0, size); 
+		}
+		fin.close();
+		sout.close();
+	} // method
+
 	
 
 }

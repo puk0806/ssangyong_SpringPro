@@ -99,9 +99,7 @@ p 438 파일 업로드
 	4) [커멘드 객체]를 통한 업로드 파일 접근
 		- 동일한 이른의 Multipartfile 타입 프로퍼티를 추가만 하면된다.
 	5) CustomerController.java    ( noticeReg() POST 저장)
-	
-	
-
+		
  -->
 
 
