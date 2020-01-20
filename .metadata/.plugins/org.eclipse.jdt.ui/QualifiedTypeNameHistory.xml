@@ -56,8 +56,8 @@
 <fullyQualifiedTypeName name="org.springframework.transaction.PlatformTransactionManager"/>
 <fullyQualifiedTypeName name="org.springframework.transaction.support.TransactionTemplate"/>
 <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
-<fullyQualifiedTypeName name="org.springframework.transaction.support.TransactionCallback"/>
 <fullyQualifiedTypeName name="org.springframework.transaction.support.TransactionCallbackWithoutResult"/>
 <fullyQualifiedTypeName name="org.springframework.transaction.TransactionDefinition"/>
 <fullyQualifiedTypeName name="org.springframework.transaction.support.DefaultTransactionDefinition"/>
+<fullyQualifiedTypeName name="org.springframework.transaction.support.TransactionCallback"/>
 </qualifiedTypeNameHistroy>
