@@ -1,0 +1,57 @@
+공지사항 목록 요청 URL 사용할 페이지
+
+p505 Spirng 트랜잭션 관리
+Spring Transaction
+ㄱ. 코드 기반 처리
+ㄴ. 선언적 트랜잭션 처리
+ㄷ. 어노테이션 기반 처리
+
+p507
+- 개발자가 직접적으로 트랙재션 범위를 코드 수준에서 정의하고 싶은 경우에는 스프링 제공하는 [트랜잭션 템플릿 클래스]를 이용해서 손쉽게  트랜잭션 범위를 지정 할 수 있다.
+- 설정파일+ 어노테이션을 이용 (매우 쉽게 트랜잭션을 관리 할 수 있다.)
+- 스프링은 데이터베이스 연동 기술에 상관없이 동일한 방식으로 트랙잭션을 처리.
+- [PlatformTransactionManger] 인터페이스 이용한 (TransactionManger)클래스들 이용
+	
+게시글 등록할 때 회원 포인트 증가 트랜잭션 처리....
+
+-- 게시글 등록하면 회원 포인트 증가 - 트렌잭션 처리
+1. 포인트 컬럼 추가
+	alter table member
+	add(point number(10) DEFAULT(0));
+2. 트랜잭션 처리 연습 하기 네약조건 추가 : 커밋, 롤백
+	- 조건 1. point 컬럼의 값이 3 이상은 들어가지 못한다
+	alter table member
+	add constraint ck_member_point check(point < 3);
+	- 조건 2. 노티스 타이틀 유일성 주기
+	alter table notices
+	add constraint uk_notice_title unique(title);
+	
+3. memeber 클래스 point 필드 겟터 셋터 추가
+4. MemberDao 복사해서 NLMemberDao
+     MemberDao 인터페이스 수정.
+5. controllers 패키지 안에는 
+ㄱ) 공지사항 컨트롤러 : CustomerController.java
+ㄴ) 회원가입 컨트롤러 추가 : JoinusController.java   
+ㄷ) 홈 관련 컨트롤러 추가 : -> HomeController.java
+
+6. 트랜잭션 테스트 : (공지사항 등록  + 작성자 포인트 1 증가)
+insertAndPointUpOfMember
+
+-------------------
+스프링에서 트랜잭션 처리 하기
+p 507 스프링에서 트랜잭션 처리를 하려면 Transaction Manager 객체를 등록을 해야 한다.
+[그림 12.1] DataSourceTransactionManager 빈객체를 등록
+
+---------------------------------
+p 518 TransactionTemplate 트랜잭션 설정
+ㄱ. 트랜잭션 전파 속성 ***
+ㄴ. 트랜잭션 격리 레벨 ***
+ㄷ. 트랜잭션 타임아웃 : 없음
+ㄹ. 읽기 전용 아님
+표 12.3
+
+
+
+
+
+

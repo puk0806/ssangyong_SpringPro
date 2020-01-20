@@ -1,0 +1,27 @@
+공지사항 목록 요청 URL 사용할 페이지
+
+dispatcher-servlet.xml 파일 빈 객체를 관리 목적 qnsfl
+- dispatcher-servlet.xml - 그외 빈객체 선언
+- dispatcher-service.xml - DB 처리 하는 빈객체
+
+NoticeDao 클래스 인터페이스 변환 , NLNoticeDao 클래스 생성
+
+[p 496 NamedParameter-JdbcTemplate 클래스를 이용]
+	- JdbcTempalte클래스와 동일한 기능가진다.
+	- 차이점 : 인덱스 기반의 파라미터가 아니라 이름 기반의 파라미터를 설정할 수 있도록 해줌
+	ex)
+	select * from guestmessage
+	where seq between ? and ?  			(X)	바인딩 변수 사용
+	where seq between :start and :end	(O) :이름 사용
+	order by seq desc
+	ㄱ. NamedParameterJdbcTemplate 객체 생성자에서 DataSource 전달 받아야 된다.
+	ㄴ. :start :end
+		- Map
+		- SqlParameterSource
+		
+p500 SimpleJdbcInsert 이용해서 간단히 데이터 삽입
+	
+
+
+
+

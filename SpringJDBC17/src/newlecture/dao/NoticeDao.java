@@ -27,7 +27,6 @@ public class NoticeDao extends SimpleJdbcDaoSupport{
 	}
 	
 	
-	
 	// 2. 조건에 맞는 공지사항의 갯수를 반환하는 메서드
 	public int getCount(String field, String query) throws ClassNotFoundException, SQLException	{
 		String sql = "SELECT COUNT(*) CNT FROM NOTICES WHERE "+field+" LIKE ?";
