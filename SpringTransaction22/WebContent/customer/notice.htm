@@ -1,0 +1,118 @@
+트랜잭션 전파 방식 (propagatin) 과 격리성 설명
+
+트랜잭션을 처리하는 과정에 또다른 트랜잭션을 처리해야 하는 경우
+(중첩 트랜잭션 처리)
+@Transactional
+* insertAndPointUpMember(){
+	a();
+	b();
+}
+* @Transactional
+  insertAndPointUpOfMember(){
+    // 주업무
+       공지사항 등록
+       포인트 증가
+       xxx();  // 트랜잭션 처리를 하는 메서드
+       
+       yyy();
+  }
+
+* @Transactional
+  xxx(){}
+
+
+* 트랜잭션 처리가  되고 있는 메서드를 수정
+   원래  insert(){} 메서드    각각 수정
+  @Transactional
+  insertAndPointUpOfMember() 각각 수정
+  {
+      @Transactional 
+      insert();
+      
+      @Transactional
+      insert();
+  }
+
+* 우선은 테스트를 중첩 트랜잭션 X    
+  @Transactional 제거
+  insertAndPointUpOfMember(){
+     insert();   test12 등록    point 2
+     insert();   test12( 같은 제목 X) 등록    point 3( 체크 제약조건 위배 )  롤백
+  }
+  @Transactional
+  insert(){}
+-> point=1 수정
+-> insertAndPointUpOfMember() 메서드 호출하면 
+
+      @트랜잭션
+     insert(){
+ --> test13 -(2)  성공  point 3( ck 실패)
+    }
+     test13 -(2)  롤백이 되야 트랜잭션 처리가 되는 것인데. X
+     
+  ***** 이유 ? 같은 클래스 내에서
+                        다른 메서드를 호출하는 구조로는 
+             AOP 방식으로
+                         트랜잭션 처리가 되지 않는다.    
+   풀이)
+        class NLNoticeDao{
+        
+            // A
+            insertAndPointUpOfMember(){
+               insert();  // X
+               insert(); 트랜잭션 걸려 있는 메서드를 호출   X
+            }
+            
+            // B
+            @Transactional
+            insert(){
+            }
+        } 
+
+   해결 :   Handler -> Service                       -> Dao -> DB
+                    insertAndPointUpOfMember       @T
+                    insert()                        insert()
+                    insert()
+     
+
+
+     
+  * newlecture.service 패키지 추가
+  * MemberShipService 인터페이스 추가
+     NoticeDao 인터페이스 안에 insertAndPointUpOfMember 메서드
+        가져다 오자.
+  * NLMemberShipService implements MemberShipService  클래스  추가
+ 
+ 
+ 
+ 
+   test 14         point 2
+   [T]insert() test 14 - (2) X   point 3(X)  롤백 확인
+ 
+ 
+  * point 1  설정
+  * @Transactional(propagation = Propagation.REQUIRED)
+	public void insertAndPointUpOfMember(Notice notice, String id)
+  * @Transactional(propagation = Propagation.REQUIRED)
+    insert() 
+  * 중첩된 트랜잭션 처리
+     [          새로생성   T  insertAndPointUpOfMember                   ]
+           T [insert()] 기존                  T[insert()] 기존 트랜잭션  
+           
+     [          새로생성   T  insertAndPointUpOfMember                   ]
+             [insert()] 기존                  [insert()] 기존 트랜잭션  
+             
+             
+     [            T(R,RN)  insertAndPointUpOfMember                   ]
+           T(RN) [insert()] 기존                  T(RN)[insert()] 기존 트랜잭션
+           
+     [            insertAndPointUpOfMember                   ]
+           T(M) [insert()] 기존                  T(M)[insert()] 기존 트랜잭션
+                    예외 발생  
+                            
+   >        test 15  2 공지사항  등록..     test 15 - (2)   3  롤백
+  
+ 
+  * 트랜잭션은 클래스의 메서드 단위가  아니라
+       인터페이스 단위에도  지정할 수 있다. 
+ 

@@ -1,0 +1,42 @@
+p512 표 12.2 트랜잭션 격리 레벨
+
+격리 레벨
+dafault : 기본 설정
+read_uncomitted : 커밋이 되지 않은 것도 읽을 수 있다.
+read_comitted : 커밋 된것만 읽을 수 있다.
+repeatable_read : 반복적인 읽기(처음에 읽어 온 데이터와 두번째  읽어온 데이터가 동일한 값을 갖는다.)
+serializable : 동일한 데이터에 대해서 동시에 두 개 이상의 트랜잭션이 수행 될 수 없다.
+
+트랜잭션 격리성(Isolation) : 동시에 실행되더라도 서로 영향을 받지 않도록 하는 방법(격리수준 설정)
+
+[트랜잭션 동시성]에 따른 문제점 -> 처리
+NoticeDao 인터페이스, 클래스  -> hitUp() 추가 : 조회수를 증가하는 트랜잭션 걸린 메서드
+ 							getHti() 추가 : 조회수를 얻어오는 메서드
+동시에 두작업 수행
+
+용어		
+1) Dirty Read 상황	// 예방 격리수준: read_commited (커밋된것만 읽을 수 있게 하기)	(hitUp meathod에 설정)
+ - hitUp() 조회수 증가 트랜잭션 메서드 호출	-> hit ++; 	(커밋X)	ex ) hit : 10 -> 11
+ - 다른곳에서 getHit() 커밋되기전 조회수 읽으러 들어옴					 hit : 11 (읽어간 값)
+ - 조회수 롤백 hit다시 감소									실제 	 hit : 10
+
+2) Non-Repeatable Read 상황	// 예방 격리수준 : repeatable_read 	(getHit meathod에 설정)
+ - getHit()	조회수 2번 읽기 작업중 한번 읽는 사이에 조회수 증가		ex) hit : 10  			hit :11
+ 																	hit : 11
+ 																	
+3) Phantom Read 상황		// 예방 격리 수준 : serializable
+ - 여러개의 레코드를 한 번에 읽어내는 과정을 반복한다고 가정
+ex) 게시글 1~10번 가져오기 			게시글 1~10번 가져오기
+					게시글 4번 삭제
+
+					
+오라클 격리 수준 지원 ->  read_uncomitted,serializable 2개만 지원
+default : 기본설정 (오라클에 설정된 격리 수준 따라 가겠다.)
+
+----------------------------
+테스트
+NoticeDao 인터페이스에 추가 
+1) hitUp()
+2) getHit() 
+					
+					
