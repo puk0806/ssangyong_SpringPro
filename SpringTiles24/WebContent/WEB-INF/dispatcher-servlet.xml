@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/tx
+           http://www.springframework.org/schema/tx/spring-tx.xsd">
+   <!-- dispatcher-servlet.xml -->      
+   <context:component-scan base-package="newlecture, controllers" />        
+   
+   <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+     <property name="maxUploadSize" value="-1"></property>
+     
+   </bean>
+   
+
+   
+   <!-- p 524 어노테이션 기반 트랜잭션에 필요한 트랜잭션 매니져 -->
+   <tx:annotation-driven transaction-manager="transactionManager"/>
+   
+   
+   <!-- 
+         타일즈를 사용하기 위한 설정 부분 
+         1. 타일즈를 사용하는 ViewResolver  
+   -->  
+   <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+      <property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"></property>
+   </bean>
+   
+   
+   <!-- 2. tiles-defs.xml  타일즈 설정파일..-->
+   <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+      <property name="definitions" value="/WEB-INF/tiles-defs.xml"></property>
+   </bean>
+   
+   <!-- p384 InterResourceViewResolver 설정부분 -->
+   <!-- 여러개의 viewResolver 사용할 수 있고 타일즈 설정파일에 뷰이름이 없는경우 -->
+   <!-- 
+   <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+   	<property name="prefix" value="/WEB-INF/view/"></property>
+   	<property name="suffix" value=".jsp"></property>
+   </bean>
+    -->
+   
+   
+   
+ 
+           
+</beans>
+
+
+
+
