@@ -47,14 +47,23 @@
 		<put-attribute name="content" value="/customer/noticeEdit.jsp" />
 	</definition>
 -->
-	<definition name="*.*" template="/{1}/inc/layout.jsp">
-		<put-attribute name="header" value="/inc/header.jsp" />
-		<put-attribute name="footer" value="/inc/footer.jsp" />
-		<put-attribute name="aside" value="/{1}/inc/aside.jsp" />
-		<put-attribute name="visual" value="/{1}/inc/visual.jsp" />
-		<put-attribute name="content" value="/{1}/{2}.jsp" />
+
+	<definition name="home.*" template="/WEB-INF/views/inc/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/inc/header.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/inc/footer.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/index.jsp" />
+		<put-attribute name="css" value="{2}.css" />		
 	</definition>
-
-
 	
+	<definition name="*.*" template="/WEB-INF/views/{1}/inc/layout.jsp">
+		<put-attribute name="css" value="{2}.css" />
+		<put-attribute name="header" value="/WEB-INF/views/inc/header.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/inc/footer.jsp" />
+		<put-attribute name="aside" value="/WEB-INF/views/{1}/inc/aside.jsp" />
+		<put-attribute name="visual" value="/WEB-INF/views/{1}/inc/visual.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	
+
+
 </tiles-definitions>

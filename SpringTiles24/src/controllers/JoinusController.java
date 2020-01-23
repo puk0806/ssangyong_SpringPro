@@ -1,7 +1,5 @@
 package controllers;
 
-import java.io.File;
-import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,12 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import newlecture.dao.MemberDao;
-import newlecture.dao.NoticeDao;
 import newlecture.vo.Member;
-import newlecture.vo.Notice;
 
 @Controller
 @RequestMapping("/joinus/*")
@@ -30,6 +25,7 @@ public class JoinusController {
 	// [ 컨트롤러 메서드 작성 ] 
 	@RequestMapping( value = "join.htm", method = RequestMethod.GET )
 	public String join(  ){ 
+		System.out.println("join컨트롤러 1요청 들어옴");
 		//return "join.jsp";
 		return "joinus.join";
 	}
@@ -45,7 +41,13 @@ public class JoinusController {
 		//return "redirect:notice.htm";
 		return "redirect:../index.htm";
     }
-
+	
+	
+	@RequestMapping(value = {"login.htm"},method = RequestMethod.GET)
+	public String login() {
+		System.out.println("join컨트롤러 2요청 들어옴");
+		return "joinus.login";
+	}
 
 
 }

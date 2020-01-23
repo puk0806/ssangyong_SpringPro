@@ -22,13 +22,83 @@ header.jsp
 footer.jsp
 layout.jsp
 
-6. Tiles 설치와 설정 방법
--라이브러리 추가
-
+ 6. Tiles 설치와 설정 방법  ( 오후 ) 
+ 
+    - http://tiles.apache.org
+    - Tiles 2.2.2 (GA) (5.6MB)     ->  tiles-2.2.2-bin.zip 다운로드
+  
+  tiels-2.2.2 > lib 폴더 안
+  1) commons-beanutils-1.8.0.jar
+  2) commons-digester-2.0.jar
+  3) jcl-over-slf4j-1.5.8.jar
+  4) slf4j-api-1.5.8.jar
+  
+  tiels-2.2.2 > lib > optional 폴더 안 
+  5) slf4j-jdk14-1.5.8.jar
+  
+  tiels-2.2.2 폴더 안 
+  6) tiles-api-2.2.2.jar
+  7) tiles-core-2.2.2.jar
+  8) tiles-jsp-2.2.2.jar
+  9) tiles-servlet-2.2.2.jar
+  10)tiles-template-2.2.2.jar
+  
+ 
+  
+  
+   dispatcher-servlet.xml   스프링 설정파일
 
 7. tile설정 파일 추가
 WEB-INF 폴더 안에 tiles-defs.xml(tiles에 관한 설정파일)
 
 p381 스프링 MVC : 뷰 구현
 
-8
+
+p 382 ViewResolver 설정
+ 
+8. 타일즈 설정
+
+- 타일즈 적용시 문제점
+1. URL 경로 문제 해결법 : 절대 경로 사용해야함
+2. css적용 문제 해결법 : 
+- js,jquery를 통해 layout에 css링크를 변경
+- tiles-defs.xml에서 변수로 받아서 변경
+
+-----------------------------------
+view 페이지를 비공개 영역으로 숨기는 작업
+모든.jsp 페이지를 바로호출 못하도록 비공개 영역으로 숨기는 작업
+
+해결)
+WebContent 폴더 안에 있는 JSP파일들을 WEB-INF폴더 안으로 옮기면 된다
+- WEB-INF -> views 폴더 추가 후 jsp 파일 이동
+
+일반적인 프로젝트 작업 순서 - 빌드 도구 (MAVEN)
+1. 프로젝트 생성
+2. 라이브러리 설정
+3. 코딩 작업
+4. 컴파일 - 실행 == (빌드 오류)
+5. 테스트
+6. 패키지
+7. 인스톨
+8. 배포
+
+STS은 이클립스 기반으로만들어진 스프링 전용 개발 도구
+https://spring.io/tools3
+
+
+
+9. 메이븐 (MAVEN) 다운받고 설치, 사용
+1) http://maven.apache.org
+2) C드라이브 압출 풀기
+3) path 설정  (M2_HOME)
+3) 콘솔창(cmd)에서 명령을 처리하는 빌드 도구
+
+mvn compile - target 폴더 생성 되고 컴파일
+mvn test - test파일 단위 테스트
+mvn package - jar 파일 생성
+mvn install - jar파일을 [로컬저장소]
+	로컬 저장소 : 라이브러리를 관리하는 장소
+배포 : deploy -> 원격 저장소(=중앙 저장소)에 배포된다.
+		-> 계정/.m2/repository
+		
+
